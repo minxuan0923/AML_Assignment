@@ -1,6 +1,6 @@
 # AML_Assignment
 
-Set 1 Logistic Regression: 
+## Set 1 Logistic Regression: 
 | | Predicted legitimate | Predicted phishing |
 | -------- | -------- | -------- |
 | Actually legitimate | 1175 correct     | 56 (false positives)     |
@@ -29,3 +29,17 @@ Note:
 - **C = 10 is a sensible choice.** It is in the middle of your grid (0.01 to 100), so the best value wasn't cut off at an edge. It means the model preferred weak regularization, i.e. it benefits from using the features freely.
 - **Errors are not balanced.** There are 79 false negatives against 56 false positives. For phishing detection, a missed phishing site is the costlier error, which is why your project tracks FNR and not just accuracy.
 - **AUC is much higher than accuracy.** The model ranks sites well, but a straight linear boundary at the default 0.5 threshold can't separate every case. This leaves room for the non-linear FCNN to improve, and that comparison is the point of your study.
+
+
+## Set 2 FCNN
+
+| Metric | Run 1 | Run 2 | Run 3 |
+| -------- | -------- | -------- | -------- |
+| Accuracy    | 0.9683     | 0.9715     | 0.9679     |
+| Precision    | 0.9730     | 0.9683     | 0.9662     |
+| Recall    | 0.9551     | 0.9673     | 0.9612     |
+| F1    | 0.9640     | 0.9678     | 0.9637     |
+| ROC-AUC    | 0.9960     | 0.9966     | 0.9958     |
+| FN    | 44     | 32     | 38     |
+| FP    | 26     | 31     | 33     |
+| FNR    | 4.49%     | 3.27%     | 3.88%     |

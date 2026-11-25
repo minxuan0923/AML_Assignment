@@ -33,13 +33,26 @@ Note:
 
 ## Set 2 FCNN
 
-| Metric | Run 1 | Run 2 | Run 3 |
-| -------- | -------- | -------- | -------- |
-| Accuracy    | 0.9683     | 0.9715     | 0.9679     |
-| Precision    | 0.9730     | 0.9683     | 0.9662     |
-| Recall    | 0.9551     | 0.9673     | 0.9612     |
-| F1    | 0.9640     | 0.9678     | 0.9637     |
-| ROC-AUC    | 0.9960     | 0.9966     | 0.9958     |
-| FN    | 44     | 32     | 38     |
-| FP    | 26     | 31     | 33     |
-| FNR    | 4.49%     | 3.27%     | 3.88%     |
+| Metric | Run 1 | Run 2 | Run 3 | Mean ± std |
+| -------- | -------- | -------- | -------- | -------- |
+| Accuracy    | 0.9683     | 0.9715     | 0.9679     | 0.9692 ± 0.0016    |
+| Precision    | 0.9730     | 0.9683     | 0.9662     | 0.9692 ± 0.0028     |
+| Recall    | 0.9551     | 0.9673     | 0.9612     | 0.9612 ± 0.0050     |
+| F1    | 0.9640     | 0.9678     | 0.9637     | 0.9652 ± 0.0019     |
+| ROC-AUC    | 0.9960     | 0.9966     | 0.9958     | 0.9961 ± 0.0003    |
+| FN    | 44     | 32     | 38     | 38.0 ± 4.9     |
+| FP    | 26     | 31     | 33     | 30.0 ± 2.9     |
+| FNR    | 4.49%     | 3.27%     | 3.88%     | 3.88% ± 0.50%     |
+
+Note: 
+- Neural networks start from random initial weights and use random shuffling and dropout, so no 3 runs give identical results.
+- Each run is simply a different draw from the same model. Thus, running a multi-seed loop is needed.
+- For each seed, the loop does the following:
+  - Sets the random seed (1, 2, 3, 4, 5).
+  - Builds a fresh FCNN with new random starting weights.
+  - Trains it on the same training data.
+  - Evaluates it on the same test set.
+  - Records the metrics (FN, recall, F1, etc.).
+
+**Suggestion:**
+**Use five seeds for the final numbers.** Three runs is a small sample for a standard deviation, so run the 5-seed loop from before to get a more reliable mean ± std. The six experiments should all use the same seeds (1 to 5).
